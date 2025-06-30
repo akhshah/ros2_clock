@@ -47,15 +47,15 @@ geometry_msgs::msg::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
 
 SimplePose CalculatePoseFromMinutes(const int num_minutes, const double radius) {
     // Convert minutes into radiuns from the zero minute mark as the reference.
-    const double radians_from_zero_minutes = M_PI / 4 - static_cast<double>(num_minutes)
+    const double radians_from_zero_minutes = M_PI / 2 - static_cast<double>(num_minutes)
         * kHourInMinutes * 2 * M_PI;
 
     // Determines the x and y position of the pose.
-    const double x_pos = radius * std::sin(radians_from_zero_minutes);
-    const double y_pos = radius * std::cos(radians_from_zero_minutes);
+    const double x_pos = radius * std::cos(radians_from_zero_minutes);
+    const double y_pos = radius * std::sin(radians_from_zero_minutes);
 
     // Find the heading of the normal vector.
-    const double yaw = std::atan2(-y_pos, x_pos);
+    const double yaw = std::atan2(-x_pos, y_pos);
 
     SimplePose pose;
     pose.x_pos = x_pos;
