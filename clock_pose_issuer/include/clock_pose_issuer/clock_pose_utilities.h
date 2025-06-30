@@ -1,6 +1,6 @@
 #pragma once
 
-#include "geometry_msg/PoseStamped.h"
+#include <geometry_msgs/msg/pose_stamped.hpp>
 
 namespace clock_pose {
 
@@ -30,7 +30,7 @@ struct SimplePose {
  *
  * @return A stamped pose containing the time that the pose was created.
  */
-geometry_msgs::PoseStamped CalculatePoseFromCurrentTime(const int radius = 1.);
+geometry_msgs::msg::PoseStamped CalculatePoseFromCurrentTime(const int radius = 1.);
 
 /**
  * Generates the pose represented by the minute hand on a clock.

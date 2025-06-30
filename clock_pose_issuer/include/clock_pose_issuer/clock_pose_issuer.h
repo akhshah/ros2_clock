@@ -1,9 +1,7 @@
 #pragma once
 
-#include "rclcpp/rclcpp.h"
-#include "geometry_msg/PoseStamped.h"
-
-#include "clock_pose_issuer/clock_pose_calculator.h"
+#include "rclcpp/rclcpp.hpp"
+#include <geometry_msgs/msg/pose_stamped.hpp>
 
 namespace clock_pose {
 
@@ -19,10 +17,8 @@ public:
 private:
     void Callback();
 
-    ClockPoseCalculator calculator_;
-
     rclcpp::TimerBase::SharedPtr timer_;
-    rclcpp::Publisher<geometry_msg::PoseStamped>::SharedPtr publisher_;
+    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr publisher_;
 };
 
 } // namespace

@@ -2,6 +2,8 @@
 #include <cmath>
 #include <ctime>
 
+#include <geometry_msgs/msg/pose_stamped.hpp>
+
 #include "clock_pose_issuer/clock_pose_utilities.h"
 
 namespace clock_pose {
@@ -12,21 +14,21 @@ namespace {
 
 } // namespace
 
-geometry_msgs::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
+geometry_msgs::msg::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
     // Convert current time to extract minutes.
     const auto now = std::chrono::system_clock::now();
-    std::time_t t_c = std::chrono::system_clock_to_time_t(now);
+    std::time_t t_c = std::chrono::system_clock::to_time_t(now);
     const std::tm tm_c = *std::localtime(&t_c);
 
     // Caluulate the fundamental pose parameters.
     int num_minutes = tm_c.tm_min;
     const SimplePose simple_pose = CalculatePoseFromMinutes(num_minutes, radius);
 
-    geometry_msgs::PoseStamped pose;
-    pose.header.frame_id = "inertial";
-    pose.point.x = simple_pos.x_pos;
-    pose.point.y = simple_pose.y_pos;
-    pose.point.z = 0.;
+    geometry_msgs::msg::PoseStamped stamped_pose;
+    stamped_pose.header.frame_id = "inertial";
+    stamped_pose.pose.position.x = simple_pose.x_pos;
+    stamped_pose.pose.position.y = simple_pose.y_pos;
+    stamped_pose.pose.position.z = 0.;
 
     // TODO(akhil): Either figure out how to use thet tf2 library or write a
     // custom one for this.
@@ -35,12 +37,12 @@ geometry_msgs::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
     double cy = std::cos(0.5 * yaw);
     double sy = std::sin(0.5 * yaw);
 
-    pose.orientation.x = 0.;
-    pose.orientation.y = 0.;
-    pose.orientation.z = sy;
-    pose.orientation.w = cy;
+    stamped_pose.pose.orientation.x = 0.;
+    stamped_pose.pose.orientation.y = 0.;
+    stamped_pose.pose.orientation.z = sy;
+    stamped_pose.pose.orientation.w = cy;
     
-    return pose;
+    return stamped_pose;
 }
 
 SimplePose CalculatePoseFromMinutes(const int num_minutes, const double radius) {
