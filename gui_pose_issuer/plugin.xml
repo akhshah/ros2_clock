@@ -1,0 +1,17 @@
+<library path="gui_pose_issuer">
+  <class name="GuiPoseIssuer" type="gui_pose_issuer.GuiPoseIssuer" base_class_type="rqt_gui_py::Plugin">
+    <description>
+        A plugin to issue pose commands from user input.
+    </description>
+    <qtgui>
+      <group>
+        <label>Publishers</label>
+        <icon type="theme">folder</icon>
+        <statustip>Plugins related to publishing.</statustip>
+      </group>
+      <label>Clock Pose</label>
+      <icon type="theme">image-x-generic</icon>
+      <statustip>A GUI plugin to publish clock based poses.</statustip>
+    </qtgui>
+  </class>
+</library>
