@@ -8,10 +8,10 @@
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_python</buildtool_depend>
-  <exec_depend>rqt_gui</exec_depend>
-  <exec_depend>rqt_gui_py</exec_depend>
+
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>python_qt_binding</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
