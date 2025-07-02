@@ -118,6 +118,7 @@ class GuiPoseIssuerWidget(QWidget):
             msg = PoseStamped()
 
             self.node.get_logger().info('Space pressed, publishing empty pose')
+            self.publisher.publish(PoseStamped())
 
             self.click_point = None
             self.last_pose = None

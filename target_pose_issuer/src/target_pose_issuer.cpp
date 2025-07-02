@@ -50,8 +50,7 @@ void TargetPoseIssuer::HandleClockPoseMessage(const geometry_msgs::msg::PoseStam
 void TargetPoseIssuer::HandleGuiPoseMessage(const geometry_msgs::msg::PoseStamped& msg) {
     // If the publisehd gui pose has a blank timestamp, it means the target pose
     // is no longer valid, and publish the last clock pose.
-    const rclcpp::Time blank_time(0, 0);
-    if (rclcpp::Time(msg.header.stamp) == blank_time) {
+    if (msg.header.stamp.sec == 0 && msg.header.stamp.nanosec == 0) {
         last_gui_pose_msg_ptr_ = nullptr;
         // Prevent race condition at start up.
         if (last_clock_pose_msg_ptr_ != nullptr) {

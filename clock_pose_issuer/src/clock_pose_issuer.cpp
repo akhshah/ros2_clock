@@ -16,7 +16,7 @@ namespace {
 
     const std::string kNodeName = "clock_pose_issuer";
     const std::string kTopicName = "clock_pose";
-    constexpr std::chrono::milliseconds kPublishFrequency = std::chrono::milliseconds(500ms); // Units [ms]
+    constexpr std::chrono::milliseconds kPublishFrequency = std::chrono::milliseconds(1s); // Units [ms]
 
 } // namespace
 
