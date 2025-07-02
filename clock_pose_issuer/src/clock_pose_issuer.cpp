@@ -4,7 +4,6 @@
 #include <geometry_msgs/msg/pose_stamped.hpp>
 
 #include "clock_pose_issuer/clock_pose_utilities.h"
-
 #include "clock_pose_issuer/clock_pose_issuer.h"
 
 
