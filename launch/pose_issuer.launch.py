@@ -5,7 +5,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import UnlessCondition
 
-def generate_launch_descriptions():
+def generate_launch_description():
     headless = LaunchConfiguration('headless')
     headless_arg = DeclareLaunchArgument(
         'headless',
@@ -15,7 +15,8 @@ def generate_launch_descriptions():
 
 
 
-    return LaunchDesription([
+    return LaunchDescription([
+        headless_arg,
         Node(
             package='clock_pose_issuer',
             executable='clock_pose_issuer',
