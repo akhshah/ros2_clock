@@ -72,4 +72,10 @@ source install/setup.<preferred shell>
 ```
 ros2 launch launch/pose_issuer.launch.py
 ```
+for headless mode.
 
+Otherwise, run:
+```
+ros2 launch launch/pose_issuer.launch.py headless:=False
+```
+to run with the GUI enabled.
