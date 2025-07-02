@@ -24,6 +24,9 @@ The poses assume that the yaw will follow in the clockwise direction.
 
 Publishes a `StampedPose` on the `clock_pose` topic.
 
+The testing for the utility functions relies on `GTest`, but that is provided by
+`ament`.
+
 ### Tasks Remaining
 - Allow for parameter changes to update the radius.
 - Allow for parameter changes to update the yaw, e.g., go backwards.
@@ -56,7 +59,6 @@ Will continuously publish clock poses, if there isn't a valid GUI pose.
 
 ### Tasks Remaining
 - Confirm that the clock pose is different from the last one, and then publish.
-
 
 ## Running the issuers
 1. Ensure that your ROS2 workspace is instantiated by running `source
