@@ -10,6 +10,9 @@ There are a few ways to ingest this information, either by directly subscribing
 to the topics themselves, or by interfacing with a thin client that subscribes
 to both, and publishes the target pose.
 
+The thin client is called Target Pose Issuer and subscribes to the two above
+publishers and publishes a target pose.
+
 The code is expected to be built on Jazzy, and has been tested on Ubuntu 24.04.
 
 For full convenience, this functionality should be containerized in Docker for
@@ -19,7 +22,7 @@ use on other platforms, but has not yet been done.
 Automatically issues a pose based on the minute hand of the current local time.
 The poses assume that the yaw will follow in the clockwise direction.
 
-Publishes a `StampedPose`
+Publishes a `StampedPose` on the `clock_pose` topic.
 
 ### Tasks Remaining
 - Allow for parameter changes to update the radius.
@@ -48,3 +51,25 @@ header.
 ## Target Pose Issuer
 A convenience client that allows for the motion controller to subscribe to a
 target pose without having to reimplement the logic to change target poses.
+
+Will continuously publish clock poses, if there isn't a valid GUI pose.
+
+### Tasks Remaining
+- Confirm that the clock pose is different from the last one, and then publish.
+
+
+## Running the issuers
+1. Ensure that your ROS2 workspace is instantiated by running `source
+/opt/ros/<ros-version>/setup.<preferred shell>`.
+
+2. `colcon build` to build all the packages.
+
+3. Run
+```
+source install/setup.<preferred shell>
+```
+4. Assuming you are in the parent directory, e.g., `ros2_clock/`, run:
+```
+ros2 launch launch/pose_issuer.launch.py
+```
+
