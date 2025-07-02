@@ -15,6 +15,10 @@ public:
     ClockPoseIssuer();
 
 private:
+    /**
+     * Callback function to calculate the pose and publish it.
+     *
+     */
     void Callback();
 
     rclcpp::TimerBase::SharedPtr timer_;

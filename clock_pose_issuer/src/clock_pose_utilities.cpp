@@ -14,6 +14,17 @@ namespace {
 
 } // namespace
 
+/**
+ * From the current time, determines the pose based on the minute hand.
+ * The pose will contain an x and y position, and a heading (yaw) that takes the robot
+ * clockwise to follow the minute hand.
+ *
+ * The pose will be provided in a fixed inertial frame.
+ *
+ * @param radius The radius of the clock face. Units [m]
+ *
+ * @return A stamped pose containing the time that the pose was created.
+ */
 geometry_msgs::msg::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
     // Convert current time to extract minutes.
     const auto now = std::chrono::system_clock::now();
@@ -45,6 +56,18 @@ geometry_msgs::msg::PoseStamped CalculatePoseFromCurrentTime(const int radius) {
     return stamped_pose;
 }
 
+/**
+ * Generates the pose represented by the minute hand on a clock.
+ * The pose will contain an x and y position, and a heading (yaw) that takes the robot
+ * clockwise to follow the minute hand.
+ *
+ * The pose will be provided in a fixed inertial frame.
+ *
+ * @param num_minutes The number of minutes since the hour began.
+ * @param radius The radius of the clock face. Units [m]
+ *
+ * @return A simple pose, containing x and y positions, and yaw.
+ */
 SimplePose CalculatePoseFromMinutes(const int num_minutes, const double radius) {
     // Convert minutes into radiuns from the zero minute mark as the reference.
     const double radians_from_zero_minutes = M_PI / 2 - static_cast<double>(num_minutes)

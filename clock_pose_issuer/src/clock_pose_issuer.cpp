@@ -14,9 +14,9 @@ namespace clock_pose {
 
 namespace {
 
-    const std::string kNodeName = "clock_pose_issuer";
-    const std::string kTopicName = "clock_pose";
-    constexpr std::chrono::milliseconds kPublishFrequency = std::chrono::milliseconds(1s); // Units [ms]
+const std::string kNodeName = "clock_pose_issuer";
+const std::string kTopicName = "clock_pose";
+constexpr std::chrono::milliseconds kPublishFrequency = std::chrono::milliseconds(1s); // Units [ms]
 
 } // namespace
 
@@ -25,6 +25,10 @@ ClockPoseIssuer::ClockPoseIssuer() : Node(kNodeName) {
     timer_ = this->create_wall_timer(kPublishFrequency, std::bind(&ClockPoseIssuer::Callback, this));
 }
 
+/**
+ * Callback function to calculate and publish the pose.
+ *
+ */
 void ClockPoseIssuer::Callback() {
     geometry_msgs::msg::PoseStamped pose_stamped = CalculatePoseFromCurrentTime();
     pose_stamped.header.stamp = this->get_clock()->now();
