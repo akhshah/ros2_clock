@@ -12,6 +12,11 @@ from python_qt_binding.QtCore import Qt, QPoint, QTimer
 from geometry_msgs.msg import PoseStamped
 
 class GuiPoseIssuerWidget(QWidget):
+    """
+    GuiPoseIssuerWidget extends QWidget and displays a clock face that the user can
+    click to publish poses. The published poses are also show on the clock face as
+    long as they are valid.
+    """
     def __init__(self, node, radius):
         super(GuiPoseIssuerWidget, self).__init__()
 
@@ -28,6 +33,11 @@ class GuiPoseIssuerWidget(QWidget):
         timer_period = 0.5 # Units: seconds
         self.cleanup_timer = self.node.create_timer(timer_period, self.timer_callback)
 
+    """
+    Return nothing
+
+    Callback function to clear the poses after 30 seconds.
+    """
     def timer_callback(self):
         # There is not published pose so nothing to clear.
         if not self.last_pose:
@@ -45,9 +55,15 @@ class GuiPoseIssuerWidget(QWidget):
             self.publisher.publish(PoseStamped())
             self.update()
 
+    """
+    Gets the radius of the clock face.
+    """
     def getClockRadius(self):
         return min(self.width(), self.height()) / 2 - 20
 
+    """
+    Paints the clock face and the valid point, if it exists.
+    """
     def paintEvent(self, event):
         painter = QPainter(self)
 
@@ -78,6 +94,11 @@ class GuiPoseIssuerWidget(QWidget):
             painter.drawPoint(self.click_point)
 
 
+    """
+    On mouse press, a pose is calculated and published.
+    The pose is fixed to the input radius, and the heading/yaw is set to follow
+    the tangent of the clock face at that point in the clockwise direction.
+    """
     def mousePressEvent(self, event):
         pos = event.pos()
         self.click_point = pos
@@ -113,6 +134,10 @@ class GuiPoseIssuerWidget(QWidget):
         self.node.get_logger().info(f'Mouse clicked. Pose = ({x:.2f}, {y:.2f}, {yaw:.2f})')
         self.publisher.publish(msg)
 
+    """
+    On key press, if the key is spacebar, clears the pose and publishes an empty
+    pose.
+    """
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Space:
             msg = PoseStamped()
