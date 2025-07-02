@@ -38,6 +38,11 @@ TargetPoseIssuer::TargetPoseIssuer() : Node(kNodeName) {
             );
 }
 
+/**
+ * Callback handler for clock pose messages.
+ *
+ * @param msg A clock pose message to be handled.
+ */
 void TargetPoseIssuer::HandleClockPoseMessage(const geometry_msgs::msg::PoseStamped& msg) {
     last_clock_pose_msg_ptr_ = std::make_unique<geometry_msgs::msg::PoseStamped>(msg);
 
@@ -47,6 +52,11 @@ void TargetPoseIssuer::HandleClockPoseMessage(const geometry_msgs::msg::PoseStam
     }
 }
 
+/**
+ * Callback handler for clock pose messages.
+ *
+ * @param msg A clock pose message to be handled.
+ */
 void TargetPoseIssuer::HandleGuiPoseMessage(const geometry_msgs::msg::PoseStamped& msg) {
     // If the publisehd gui pose has a blank timestamp, it means the target pose
     // is no longer valid, and publish the last clock pose.
@@ -67,7 +77,7 @@ void TargetPoseIssuer::HandleGuiPoseMessage(const geometry_msgs::msg::PoseStampe
     publisher_->publish(msg);
 }
 
-} // namespace
+} // namespace target_pose
 
 int main(int argc, char* argv[]) {
     rclcpp::init(argc, argv);

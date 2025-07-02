@@ -37,7 +37,7 @@ void ClockPoseIssuer::Callback() {
     publisher_->publish(pose_stamped);
 }
 
-} // namespace
+} // namespace clock_pose
 
 int main(int argc, char* argv[]) {
     rclcpp::init(argc, argv);

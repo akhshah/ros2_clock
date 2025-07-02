@@ -25,4 +25,4 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr publisher_;
 };
 
-} // namespace
+} // namespace clock_pose
